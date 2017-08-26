@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Flight Mapper</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/application.css">
+    <link href="/stylesheets/select2.min.css" rel="stylesheet">
+    <link href="/stylesheets/pace.css" rel="stylesheet">
+    <script src="/javascripts/jquery-3.2.0.js"></script>
+    <script src="/javascripts/select2.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/pace.min.js"></script>
+    <script src="/javascripts/application.js"></script>
+  </head>
+  <body>
+    <div id="message">
+    </div>
+    <%== yield %>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnd4doUAnl3kckBE8CBzGv3sx_rdB1qo8&callback=initMap" type="text/javascript"></script>
+  </body>
+</html>

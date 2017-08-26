@@ -1,0 +1,192 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Flight Mapper</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="#new_search_modal" data-toggle="modal" data-target="#new_search_modal">Search Routes</a>
+        </li>
+        <li id="saved_trips_link"><a href="/saved_trips">View Your Trips</a></li>
+      </ul>
+      <form class="navbar-form navbar-left" id="search_users_form" action="/user_routes" method="get">
+        <div class="form-group">
+          <select name="user_name" class="js-select" id="users_list" style="width: 85%">
+            <option value="">Search Users</option>
+            <% @users.each do |user| %>
+              <option value="<%= "#{user[:id]};#{user[:name]}" %>">
+                <%= user[:name] %>
+              </option>
+            <% end %>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-basic">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li id="user_info" class="navbar-text"<%== "style='display:none;'" unless signed_in? %>>
+          <p><em>Signed in as <%= session[:user_name] %></em></p>
+        </li>
+        <li id="share_trips_link" <%== "style='display:none;'" unless signed_in? %>>
+          <a href="#share_trips_modal" data-toggle="modal" data-target="#share_trips_modal">Share Your Trips</a>
+        </li>
+        <li id="sign_out_link" <%== "style='display:none;'" unless signed_in? %>>
+          <a href="#">Sign Out</a>
+        </li>
+        <li id="signin_link" <%== "style='display: none;''" if signed_in? %>>
+          <a href="#signin_modal" data-toggle="modal" data-target="#signin_modal">Sign In</a>
+        </li>
+        <li id="register_link" <%== "style='display:none;'" if signed_in? %>>
+          <a href="#register_modal" data-toggle="modal" data-target="#register_modal">Register</a>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="modal fade" id="new_search_modal" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <form id="search_form" action="/searched_routes" method="get">
+            <h2>Choose source and/or destination:</h2>
+              <div class="source_fields">
+                <h3>Source</h3>
+                <p>
+                  <select name="source_country" class="js-select" id="source_countries_list" style="width: 75%;">
+                    <option value="">Select Country</option>
+                    <% @countries.each do |country| %>
+                      <option value="<%= country[:id] %>">
+                        <%= country[:name] %>
+                      </option>
+                    <% end %>
+                  </select>
+                </p>
+                <p>
+                  <select name="source_city" class="js-select" id="source_cities_list" style="width: 75%;">
+                    <option></option>
+                  </select>
+                </p>
+                <p>
+                  <select name="source_airport" class="js-select" id="source_airports_list" style="width: 75%;">
+                    <option></option>
+                  </select>
+                </p>
+              </div>
+              <div class="dest_fields">
+                <h3>Destination</h3>
+                <p>
+                  <select name="dest_country" class="js-select" id="dest_countries_list" style="width: 75%;">
+                    <option value="">Select Country</option>
+                    <% @countries.each do |country| %>
+                      <option value="<%= country[:id] %>">
+                        <%= country[:name] %>
+                      </option>
+                    <% end %>
+                  </select>
+                </p>
+                <p>
+                  <select name="dest_city" class="js-select" id="dest_cities_list" style="width: 75%;">
+                    <option></option>
+                  </select>
+                </p>
+                <p>
+                  <select name="dest_airport" class="js-select" id="dest_airports_list" style="width: 75%;">
+                    <option></option>
+                  </select>
+                </p>
+              </div>
+            <div id="search_flights_button">
+              <button type="submit" class="btn btn-basic">Submit</button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="signin_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form id="signin_form" method="post" action="/sign_in">
+          <h3>Sign In</h3>
+          <div class="form-group">
+            <label for="user_name">User Name:</label>
+            <input type="user_name" class="form-control" id="signin_user_name">
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="signin_password">
+          </div>
+          <button type="submit" class="btn btn-basic">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="register_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form id="register_form" method="post" action="/register">
+          <h3>Register</h3>
+          <div class="form-group">
+            <label for="user_name">User ID:</label>
+            <input type="user_name" class="form-control" id="register_user_name">
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="register_password">
+          </div>
+          <button type="submit" class="btn btn-basic">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="share_trips_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3>Share your trips with the link below:</h3>
+        <div id="user_link_div">
+          <p id="user_link"><%== create_user_link if signed_in? %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="save_trips_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id='save_trips_modal_body'>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="delete_trips_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id="delete_trips_modal_body">
+      </div>
+    </div>
+  </div>
+</div>
+<div id="map_info">
+  <div id="map_title">
+    <strong id="result_title">No Routes Selected</strong>
+  </div>
+  <div id="data">
+    <p><em id="route_count">Routes: 0</em></p>
+    <p><em id="country_count">Countries: 0</em></p>
+    <p><em id="city_count">Cities: 0</em></p>
+    <p><em id="total_distance">Distance: 0 mi</em></p>
+  </div>
+</div>
+</div>
+<div id="map"></div>

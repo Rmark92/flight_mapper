@@ -1,0 +1,235 @@
+body {
+  background-color: #444f5e;
+}
+
+header > h1 {
+  text-align: center;
+  font-family: verdana;
+}
+
+div.modal-body {
+  background-color: #0e1f3a;
+  height: 300px;
+}
+form#search_form {
+  position: relative;
+  top: -2px;
+}
+
+form#search_form > h2 {
+  text-align: center;
+  position: relative;
+  top: -8px;
+}
+
+div.fields {
+  width: 400px;
+  height:200px;
+}
+
+div.source_fields {
+  text-align: center;
+  width: 300px;
+  position: relative;
+  top: 10px;
+  right: 15px;
+}
+
+div.dest_fields {
+  text-align: center;
+  width: 300px;
+  position: relative;
+  left: 280px;
+  bottom: 150px;
+}
+
+/*#search_flights_button > button {
+  height: 40px;
+  width: 60px;
+}*/
+
+div#search_flights_button {
+  position: relative;
+  top: -140px;
+  left: 251px;
+}
+/*
+div#saved_trips_botton {
+  position: relative;
+  bottom:50px;
+  left: 150px:
+}*/
+
+form#search_users_form {
+  width: 400px;
+}
+
+div.form-group {
+  width: 250px;
+}
+
+form#search_users_form > button.btn {
+  position: relative;
+  right: 15px;
+}
+
+.source_fields > h3 {
+  position: relative;
+  bottom: 10px;
+}
+
+.dest_fields > h3 {
+  position: relative;
+  bottom: 10px;
+}
+
+#signin_form > h3 {
+  text-align: center;
+}
+
+.modal-body {
+  color: #edefe8;
+}
+
+button.btn {
+  border-radius: 2px;
+  font-size: 12px;
+}
+
+#signin_form > button.btn {
+  color: black;
+}
+
+#register_form > button.btn {
+  color: black;
+}
+
+#search_flights_button > button.btn {
+  color: black;
+}
+
+#register_form > h3 {
+  text-align: center;
+}
+
+#user_info {
+  color: #edefe8;
+  height: 10px;
+}
+
+div#map_info {
+  background-color: white;
+  width:200px;
+  position: relative;
+  z-index: 6;
+  font-size: small;
+  left: 85%;
+  top: -10px;
+  border-radius: 5px;
+  height: 150px;
+}
+
+div#map_title {
+  text-align: center;
+  position: relative;
+  top: 5px;
+}
+
+div#data {
+  position: relative;
+  left: 10px;
+  top: 10px;
+}
+
+#map {
+  height: 800px;
+  width: 100%;
+  margin: 0 auto;
+  bottom:170px;
+}
+
+div#message > .success {
+  position: fixed;
+  z-index: 6;
+  background-color: #5fc363;
+  border-radius: 5px;
+  top: 60px;
+  left: 35%;
+  height: 25px;
+  width: 400px;
+  text-align: center;
+  color: #0e1f3a;
+}
+
+div#message > .error {
+  position: fixed;
+  z-index: 6;
+  background-color: #de6873;
+  color: #0e1f3a;
+  border-radius: 5px;
+  top: 5px;
+  left: 29%;
+  height: 25px;
+  width: 600px;
+  text-align: center;
+}
+
+#share_trips_modal > .modal-dialog > .modal-content > .modal-body {
+  height: 170px;
+  text-align: center;
+}
+
+#user_link_div {
+  width: 90%;
+  text-align: center;
+  color: black;
+  background-color: white;
+  position: relative;
+  height: 25px;
+  border-radius: 5px;
+  margin: auto;
+  font-size: 16px;
+  top: 15px;
+}
+
+#save_trips_modal > .modal-dialog {
+  width: 60%;
+}
+
+#save_trips_modal > .modal-dialog > .modal-content > .modal-body {
+  height: 180px;
+  text-align: center;
+}
+
+#save_trips_button {
+  position: relative;
+  top: 20px;
+  left: -20px;
+}
+
+#cancel_save_trips_button {
+  position: relative;
+  top: 20px;
+  left: 20px;
+}
+
+#delete_trips_modal > .modal-dialog {
+  width: 60%;
+}
+
+#delete_trips_modal > .modal-dialog > .modal-content > .modal-body {
+  height: 180px;
+  text-align: center;
+}
+
+#delete_trips_button {
+  position: relative;
+  top: 20px;
+  left: -20px;
+}
+
+#cancel_delete_trips_button {
+  position: relative;
+  top: 20px;
+  left: 20px;
+}
