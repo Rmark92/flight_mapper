@@ -2,10 +2,12 @@ require 'sinatra'
 require 'json'
 require 'bcrypt'
 require 'uri'
-
+require 'tilt/erubis'
+# https://flight-mapper88.herokuapp.com/
 # AIzaSyAnd4doUAnl3kckBE8CBzGv3sx_rdB1qo8
 working_dir = File.dirname(__FILE__)
 
+# @key =
 require_relative "#{working_dir}/data/flight_db"
 
 configure do

@@ -3,6 +3,7 @@ GEM
   specs:
     ast (2.3.0)
     backports (3.8.0)
+    bcrypt (3.1.11)
     coderay (1.1.1)
     erubis (2.7.0)
     json (2.0.3)
@@ -16,6 +17,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    puma (3.7.1)
     rack (1.6.8)
     rack-protection (1.5.3)
       rack
@@ -48,13 +50,18 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt
   erubis
   json
   pg
   pry
+  puma
   rubocop
   sinatra (~> 1.4.7)
   sinatra-contrib
+
+RUBY VERSION
+   ruby 2.3.0p0
 
 BUNDLED WITH
    1.14.6

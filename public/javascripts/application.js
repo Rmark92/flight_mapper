@@ -511,6 +511,9 @@ function drawMapData(data, purpose) {
           header.text(header_text);
           console.log('working here');
           $('#save_trips_modal').modal('show');
+          $('#save_trips_modal').on('hide.bs.modal', function() {
+            $('#save_trips_form').remove();
+          });
           $('#save_trips_form > button').click(function(e) {
             e.preventDefault();
             console.log('save again');
@@ -542,7 +545,7 @@ function drawMapData(data, purpose) {
               });
             };
             $('#save_trips_modal').modal('hide');
-            $('#save_trips_form').remove();
+            // $('#save_trips_form').remove();
           })
         } else if (purpose == 'saved_routes') {
          var form = "<form action='/delete_trip' method='post' id='delete_trips_form'>\
@@ -557,6 +560,9 @@ function drawMapData(data, purpose) {
           header.text(header_text);
           console.log('working here');
           $('#delete_trips_modal').modal('show');
+          $('#delete_trips_modal').on('hide.bs.modal', function() {
+            $('#delete_trips_form').remove();
+          })
           $('#delete_trips_form > button').click(function(e) {
             e.preventDefault();
             console.log('delete again');

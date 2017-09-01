@@ -3,7 +3,11 @@ require 'pg'
 class FlightDB
   def initialize(logger)
     @logger = logger
-    @db = PG.connect(dbname: 'flight_mapper')
+    @db = if Sinatra::Base.production?
+            PG.connect(ENV['DATABASE_URL'])
+          else
+            PG.connect(dbname: 'flight_mapper')
+          end
   end
 
   def close_connection

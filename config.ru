@@ -1,3 +1,3 @@
-require "#{File.dirname(__FILE__)}/application.rb"
+require "#{File.dirname(__FILE__)}/flight_mapper.rb"
 
 run Sinatra::Application
