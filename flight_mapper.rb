@@ -4,17 +4,8 @@ require 'bcrypt'
 require 'uri'
 require 'tilt/erubis'
 
-
-@gmaps_key = if production?
-              ENV['GMAPS_PROD_KEY']
-            elsif development?
-              ENV['GMAPS_DEV_KEY']
-            end
 # https://flight-mapper88.herokuapp.com/
-# AIzaSyAnd4doUAnl3kckBE8CBzGv3sx_rdB1qo8
 working_dir = File.dirname(__FILE__)
-
-# @key =
 require_relative "#{working_dir}/data/flight_db"
 
 configure do
@@ -30,7 +21,17 @@ configure(:development) do
   also_reload "#{working_dir}/data/flight_db.rb"
 end
 
+GMAPS_KEY = if Sinatra::Base.production?
+              ENV['GMAPS_PROD_KEY']
+            elsif Sinatra::Base.development?
+              ENV['GMAPS_DEV_KEY']
+            end
+
 before do
+  puts "Rack env: #{ENV['RACK_ENV']}"
+  puts "Prod GMAPS KEY: #{ENV['GMAPS_PROD_KEY']}"
+  puts "Dev GMAPS KEY: #{ENV['GMAPS_DEV_KEY']}"
+  puts "GMAPS_KEY: #{GMAPS_KEY}"
   @database = FlightDB.new(logger)
   session[:user_id] ||= @database.create_temp_user
 end
