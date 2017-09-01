@@ -3,6 +3,13 @@ require 'json'
 require 'bcrypt'
 require 'uri'
 require 'tilt/erubis'
+
+
+@gmaps_key = if production?
+              ENV['GMAPS_PROD_KEY']
+            elsif development?
+              ENV['GMAPS_DEV_KEY']
+            end
 # https://flight-mapper88.herokuapp.com/
 # AIzaSyAnd4doUAnl3kckBE8CBzGv3sx_rdB1qo8
 working_dir = File.dirname(__FILE__)
