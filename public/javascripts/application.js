@@ -1,6 +1,3 @@
-Pace.options = {
-  ajax: false
-}
 $(document).ready(function() {
   $(".js-select").select2();
 
@@ -71,7 +68,6 @@ $(document).ready(function() {
     airports_list.empty();
     city_list.empty();
     if (country_id != '' && country_id != 'int') {
-      Pace.restart();
       $('#international_dest').remove();
       $('#dest_countries_list').prepend($("<option id='international_dest' value='int'>INTERNATIONAL</option>"))
       city_list.prop('disabled', false);
@@ -101,7 +97,6 @@ $(document).ready(function() {
     airports_list.empty();
     city_list.empty();
     if (country_id != '' && country_id != 'int') {
-      Pace.restart();
       $('#international_source').remove();
       $('#source_countries_list').prepend(("<option id='international_source' value='int'>INTERNATIONAL</option>"))
       city_list.prop('disabled', false);
@@ -128,7 +123,6 @@ $(document).ready(function() {
     var airport_list = $('#source_airports_list');
     airport_list.empty();
     if (city_id != '') {
-      Pace.restart();
       airport_list.prop('disabled', false);
       airport_list.append($("<option></option>").attr("value", '').text('Select Airport'));
       $.ajax({
@@ -158,7 +152,6 @@ $(document).ready(function() {
     var airport_list = $('#dest_airports_list');
     airport_list.empty();
     if (city_id != '') {
-      Pace.restart();
       airport_list.prop('disabled', false);
       airport_list.append($("<option></option>").attr("value", '').text('Select Airport'));
       $.ajax({
@@ -184,8 +177,8 @@ $(document).ready(function() {
   });
 
   $('#signin_form').on('submit', function(e) {
-    Pace.restart();
     e.preventDefault();
+    Pace.restart();
     var user_name = $('#signin_user_name').val();
     var password = $('#signin_password').val();
     var request = $.ajax({
@@ -229,8 +222,8 @@ $(document).ready(function() {
   })
 
   $('#register_form').on('submit', function(e) {
-    Pace.restart();
     e.preventDefault();
+    Pace.restart();
     var user_name = $('#register_user_name').val();
     var password = $('#register_password').val();
     request = $.ajax({
