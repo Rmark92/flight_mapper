@@ -1,3 +1,6 @@
+Pace.options = {
+  ajax: false
+}
 $(document).ready(function() {
   $(".js-select").select2();
 
@@ -309,7 +312,6 @@ $(document).ready(function() {
         Pace.stop();
       }
     });
-    // Pace.stop();
   })
 
 
@@ -351,7 +353,6 @@ $(document).ready(function() {
         Pace.stop();
       }
     });
-    // Pace.stop();
   })
 
   $('#saved_trips_link').on('click', function(e) {
@@ -382,7 +383,6 @@ $(document).ready(function() {
         Pace.stop();
       }
     });
-    // Pace.stop();
   })
 
   $('#search_users_form').on('submit', function(e) {
@@ -406,7 +406,6 @@ $(document).ready(function() {
         Pace.stop();
       }
     })
-    // Pace.stop();
   })
 });
 
