@@ -28,10 +28,6 @@ GMAPS_KEY = if Sinatra::Base.production?
             end
 
 before do
-  puts "Rack env: #{ENV['RACK_ENV']}"
-  puts "Prod GMAPS KEY: #{ENV['GMAPS_PROD_KEY']}"
-  puts "Dev GMAPS KEY: #{ENV['GMAPS_DEV_KEY']}"
-  puts "GMAPS_KEY: #{GMAPS_KEY}"
   @database = FlightDB.new(logger)
   session[:user_id] ||= @database.create_temp_user
 end

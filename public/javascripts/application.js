@@ -68,7 +68,6 @@ $(document).ready(function() {
     airports_list.empty();
     city_list.empty();
     if (country_id != '' && country_id != 'int') {
-      console.log('CHANGED with id!');
       $('#international_dest').remove();
       $('#dest_countries_list').prepend($("<option id='international_dest' value='int'>INTERNATIONAL</option>"))
       city_list.prop('disabled', false);
@@ -84,7 +83,6 @@ $(document).ready(function() {
         }
       });
     } else {
-      console.log('CHANGED without id!');
       $('#international_dest').remove();
       city_list.prop('disabled', true)
     };
@@ -173,6 +171,7 @@ $(document).ready(function() {
   });
 
   $('#signin_form').on('submit', function(e) {
+    Pace.restart();
     e.preventDefault();
     var user_name = $('#signin_user_name').val();
     var password = $('#signin_password').val();
@@ -198,23 +197,26 @@ $(document).ready(function() {
           var message = $('#message');
           message.html(success_message);
           message.children("p").fadeOut(8000);
+          Pace.stop();
         } else if (data.status == 'error') {
           var error_message = "<p class='error'>" + data.content + "</p>"
           var message = $('#message');
           message.html(error_message);
           message.children("p").fadeOut(8000);
-
+          Pace.stop();
         }
       }), error: function(jqXHR, textStatus, errorThrown) {
         var error_message = "<p class='error'>Internal Server Error</p>"
         var message = $('#message')
         message.html(error_message);
         message.children("p").fadeOut(8000);
+        Pace.stop();
       }
     });
   })
 
   $('#register_form').on('submit', function(e) {
+    Pace.restart();
     e.preventDefault();
     var user_name = $('#register_user_name').val();
     var password = $('#register_password').val();
@@ -240,17 +242,20 @@ $(document).ready(function() {
           var message = $('#message');
           message.html(success_message);
           message.children("p").fadeOut(8000);
+          Pace.stop();
         } else if (data.status == 'error') {
           var error_message = "<p class='error'>" + data.content + "</p>"
           var message = $('#message');
           message.html(error_message);
           message.children("p").fadeOut(8000);
+          Pace.stop();
         }
       }), error: function(jqXHR, textStatus, errorThrown) {
         var error_message = "<p class='error'>Internal Server Error</p>"
         var message = $('#message')
         message.html(error_message);
         message.children("p").fadeOut(8000);
+        Pace.stop();
       }
     });
   });
@@ -283,6 +288,7 @@ $(document).ready(function() {
             var message = $('#message')
             message.html(error_message);
             message.children("p").fadeOut(8000);
+            Pace.stop();
           }
         });
       }, error: function(jqXHR, textStatus, errorThrown) {
@@ -290,9 +296,10 @@ $(document).ready(function() {
         var message = $('#message')
         message.html(error_message);
         message.children("p").fadeOut(8000);
+        Pace.stop();
       }
     });
-    Pace.stop();
+    // Pace.stop();
   })
 
 
@@ -308,7 +315,6 @@ $(document).ready(function() {
     var query = 'source_country=' + source_country_id + '&source_city=' + source_city_id +
                 '&source_airport=' + source_airport_id + '&dest_country=' + dest_country_id +
                 '&dest_city=' + dest_city_id + '&dest_airport=' + dest_airport_id
-    console.log('again');
     $.ajax({
       type: 'get',
       url: '/searched_routes?' + query,
@@ -319,20 +325,23 @@ $(document).ready(function() {
           var desc = 'searched_routes';
           drawMapData(data.content, desc);
           $('#new_search_modal').modal('hide');
+          Pace.stop();
         } else {
           var error_message = "<p class='error'>" + data.content + "</p>"
           var message = $('#message');
           message.html(error_message);
           message.children("p").fadeOut(15000);
+          Pace.stop();
         }
       }, error: function(jqXHR, textStatus, errorThrown) {
         var error_message = "<p class='error'>Internal Server Error</p>"
         var message = $('#message')
         message.html(error_message);
         message.children("p").fadeOut(8000);
+        Pace.stop();
       }
     });
-    Pace.stop();
+    // Pace.stop();
   })
 
   $('#saved_trips_link').on('click', function(e) {
@@ -343,25 +352,27 @@ $(document).ready(function() {
       url: '/saved_trips',
       dataType: 'json',
       success: function(data, textStatus, jqXHR) {
-        console.log(data.status);
         if (data.status == 'error') {
           var error_message = "<p class='error'>" + data.content + "</p>"
           var message = $('#message')
           message.html(error_message);
           message.children("p").fadeOut(8000);
+          Pace.stop();
         } else if (data.status == 'success') {
           removePolylines();
           desc = "saved_routes"
           drawMapData(data.content, desc);
+          Pace.stop();
         }
       }, error: function(jqXHR, textStatus, errorThrown) {
         var error_message = "<p class='error'>Internal Server Error</p>"
         var message = $('#message')
         message.html(error_message);
         message.children("p").fadeOut(8000);
+        Pace.stop();
       }
     });
-    Pace.stop();
+    // Pace.stop();
   })
 
   $('#search_users_form').on('submit', function(e) {
@@ -376,14 +387,16 @@ $(document).ready(function() {
       success: function(data, textStatus, jqXHR) {
         var desc = 'searched_routes';
         drawMapData(data, desc);
+        Pace.stop();
       }, error: function(jqXHR, textStatus, errorThrown) {
         var error_message = "<p class='error'>Internal Server Error</p>"
         var message = $('#message')
         message.html(error_message);
         message.children("p").fadeOut(8000);
+        Pace.stop();
       }
     })
-    Pace.stop();
+    // Pace.stop();
   })
 });
 
@@ -415,7 +428,6 @@ function drawMapData(data, purpose) {
   } else {
     opacity_untouched = 1
   }
-  console.log(opacity_untouched);
   var opacity_touched = 0.99;
   $.each(routes, function(i, route) {
     var source_coordinates = route.source_coordinates
@@ -509,14 +521,12 @@ function drawMapData(data, purpose) {
           header_text = 'Would you like to save this trip from ' +
                         source_city + ' to ' + dest_city + '?'
           header.text(header_text);
-          console.log('working here');
           $('#save_trips_modal').modal('show');
           $('#save_trips_modal').on('hide.bs.modal', function() {
             $('#save_trips_form').remove();
           });
           $('#save_trips_form > button').click(function(e) {
             e.preventDefault();
-            console.log('save again');
             var button_val = $(this).attr('value');
             if (button_val == 'save') {
               $.ajax({
@@ -545,7 +555,6 @@ function drawMapData(data, purpose) {
               });
             };
             $('#save_trips_modal').modal('hide');
-            // $('#save_trips_form').remove();
           })
         } else if (purpose == 'saved_routes') {
          var form = "<form action='/delete_trip' method='post' id='delete_trips_form'>\
@@ -558,14 +567,12 @@ function drawMapData(data, purpose) {
           header_text = 'Would you like to delete this trip from ' +
                         source_city + ' to ' + dest_city + '?'
           header.text(header_text);
-          console.log('working here');
           $('#delete_trips_modal').modal('show');
           $('#delete_trips_modal').on('hide.bs.modal', function() {
             $('#delete_trips_form').remove();
           })
           $('#delete_trips_form > button').click(function(e) {
             e.preventDefault();
-            console.log('delete again');
             var button_val = $(this).attr('value');
             if (button_val == 'delete') {
               $.ajax({
