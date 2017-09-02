@@ -68,6 +68,7 @@ $(document).ready(function() {
     airports_list.empty();
     city_list.empty();
     if (country_id != '' && country_id != 'int') {
+      Pace.restart();
       $('#international_dest').remove();
       $('#dest_countries_list').prepend($("<option id='international_dest' value='int'>INTERNATIONAL</option>"))
       city_list.prop('disabled', false);
@@ -80,11 +81,12 @@ $(document).ready(function() {
           $.each(cities, function(i, city) {
             city_list.append($("<option></option>").attr("value", city.id).text(city.name));
           });
+          Pace.stop();
         }
       });
     } else {
       $('#international_dest').remove();
-      city_list.prop('disabled', true)
+      city_list.prop('disabled', true);
     };
   });
 
@@ -96,6 +98,7 @@ $(document).ready(function() {
     airports_list.empty();
     city_list.empty();
     if (country_id != '' && country_id != 'int') {
+      Pace.restart();
       $('#international_source').remove();
       $('#source_countries_list').prepend(("<option id='international_source' value='int'>INTERNATIONAL</option>"))
       city_list.prop('disabled', false);
@@ -108,11 +111,12 @@ $(document).ready(function() {
           $.each(cities, function(i, city) {
             city_list.append($("<option></option>").attr("value", city.id).text(city.name));
           });
+          Pace.stop();
         }
       });
     } else {
       $('#international_source').remove();
-      city_list.prop('disabled', true)
+      city_list.prop('disabled', true);
     };
   });
 
@@ -121,6 +125,7 @@ $(document).ready(function() {
     var airport_list = $('#source_airports_list');
     airport_list.empty();
     if (city_id != '') {
+      Pace.restart();
       airport_list.prop('disabled', false);
       airport_list.append($("<option></option>").attr("value", '').text('Select Airport'));
       $.ajax({
@@ -131,11 +136,13 @@ $(document).ready(function() {
           $.each(airports, function(i, airport) {
             airport_list.append($("<option></option>").attr("value", airport.id).text(airport.name));
           });
+          Pace.stop();
         }, error: function(jqXHR, textStatus, errorThrown) {
           var error_message = "<p class='error'>Internal Server Error</p>"
           var message = $('#message')
           message.html(error_message);
           message.children("p").fadeOut(8000);
+          Pace.stop();
         }
     	});
     } else {
@@ -148,6 +155,7 @@ $(document).ready(function() {
     var airport_list = $('#dest_airports_list');
     airport_list.empty();
     if (city_id != '') {
+      Pace.restart();
       airport_list.prop('disabled', false);
       airport_list.append($("<option></option>").attr("value", '').text('Select Airport'));
       $.ajax({
@@ -158,11 +166,13 @@ $(document).ready(function() {
           $.each(airports, function(i, airport) {
             airport_list.append($("<option></option>").attr("value", airport.id).text(airport.name));
           });
+          Pace.stop();
         }, error: function(jqXHR, textStatus, errorThrown) {
           var error_message = "<p class='error'>Internal Server Error</p>"
           var message = $('#message')
           message.html(error_message);
           message.children("p").fadeOut(8000);
+          Pace.stop();
         }
       });
     } else {
