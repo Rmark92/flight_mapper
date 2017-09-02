@@ -523,6 +523,7 @@ function drawMapData(data, purpose) {
           });
           $('#save_trips_form > button').click(function(e) {
             e.preventDefault();
+            Pace.restart();
             var button_val = $(this).attr('value');
             if (button_val == 'save') {
               $.ajax({
@@ -536,17 +537,20 @@ function drawMapData(data, purpose) {
                   var message = $('#message')
                   message.html(success_message)
                   message.children("p").fadeOut(8000)
+                  Pace.stop();
                 } else if (data.status == 'error') {
                   var error_message = "<p class='error'>" + data.content + "</p>"
                   var message = $('#message');
                   message.html(error_message);
                   message.children("p").fadeOut(8000);
+                  Pace.stop();
                 }
               }, error: function(jqXHR, textStatus, errorThrown) {
                 var error_message = "<p class='error'>Internal Server Error</p>"
                 var message = $('#message')
                 message.html(error_message);
                 message.children("p").fadeOut(8000);
+                Pace.stop();
               }
               });
             };
@@ -569,6 +573,7 @@ function drawMapData(data, purpose) {
           })
           $('#delete_trips_form > button').click(function(e) {
             e.preventDefault();
+            Pace.restart();
             var button_val = $(this).attr('value');
             if (button_val == 'delete') {
               $.ajax({
@@ -584,12 +589,14 @@ function drawMapData(data, purpose) {
                   var message = $('#message')
                   message.html(success_message)
                   message.children("p").fadeOut(8000)
+                  Pace.stop();
                 }
               }, error: function(jqXHR, textStatus, errorThrown) {
                 var error_message = "<p class='error'>Internal Server Error</p>"
                 var message = $('#message')
                 message.html(error_message);
                 message.children("p").fadeOut(8000);
+                Pace.stop();
               }
               });
             };
