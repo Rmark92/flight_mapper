@@ -80,7 +80,6 @@ $(document).ready(function() {
           $.each(cities, function(i, city) {
             city_list.append($("<option></option>").attr("value", city.id).text(city.name));
           });
-          Pace.stop();
         }
       });
     } else {
@@ -109,7 +108,6 @@ $(document).ready(function() {
           $.each(cities, function(i, city) {
             city_list.append($("<option></option>").attr("value", city.id).text(city.name));
           });
-          Pace.stop();
         }
       });
     } else {
@@ -133,13 +131,11 @@ $(document).ready(function() {
           $.each(airports, function(i, airport) {
             airport_list.append($("<option></option>").attr("value", airport.id).text(airport.name));
           });
-          Pace.stop();
         }, error: function(jqXHR, textStatus, errorThrown) {
           var error_message = "<p class='error'>Internal Server Error</p>"
           var message = $('#message')
           message.html(error_message);
           message.children("p").fadeOut(8000);
-          Pace.stop();
         }
     	});
     } else {
@@ -162,13 +158,11 @@ $(document).ready(function() {
           $.each(airports, function(i, airport) {
             airport_list.append($("<option></option>").attr("value", airport.id).text(airport.name));
           });
-          Pace.stop();
         }, error: function(jqXHR, textStatus, errorThrown) {
           var error_message = "<p class='error'>Internal Server Error</p>"
           var message = $('#message')
           message.html(error_message);
           message.children("p").fadeOut(8000);
-          Pace.stop();
         }
       });
     } else {
