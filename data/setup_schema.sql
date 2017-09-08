@@ -127,6 +127,28 @@ WHERE NOT EXISTS (
   FROM routes
   WHERE routes.source_id = airports.id OR routes.destination_id = airports.id);
 
+DELETE FROM cities
+WHERE cities.id NOT IN (
+  SELECT airports.city_id
+  FROM airports);
+
+DELETE FROM countries
+WHERE countries.id NOT IN (
+  SELECT airports.country_id
+  FROM airports
+);
+
+UPDATE cities
+SET name = (
+  SELECT upper(substring(cities.name from 1 for 1)) ||
+    lower(substring(cities.name from 2 for length(cities.name)))
+  FROM cities b
+  WHERE b.name = cities.name)
+WHERE cities.name = upper(cities.name);
+
+UPDATE cities
+SET name = 'St Mary''s' WHERE id = 6321;
+
 CREATE TABLE users(
   id serial PRIMARY KEY,
   name character varying(30) UNIQUE,

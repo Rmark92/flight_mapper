@@ -4,7 +4,6 @@ require 'bcrypt'
 require 'uri'
 require 'tilt/erubis'
 
-# https://flight-mapper88.herokuapp.com/
 working_dir = File.dirname(__FILE__)
 require_relative "#{working_dir}/data/flight_db"
 
